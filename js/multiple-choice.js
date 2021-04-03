@@ -4,6 +4,15 @@ export default function multipleChoice(task, tasks, deleteBtn) {
   let mode = "normal";
   let selectIsActive = false;
 
+  const stats = () => {
+    let allTasks = d.querySelectorAll(".task");
+    let allCompTasks = d.querySelectorAll(".task.completed");
+    d.getElementById("nTasks").textContent = allTasks.length;
+    d.getElementById("nCompletedTasks").textContent = allCompTasks.length;
+    d.getElementById("nIncompleteTasks").textContent =
+      allTasks.length - allCompTasks.length;
+  };
+
   d.addEventListener("click", (e) => {
     let tasksList = d.querySelectorAll(tasks);
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
@@ -60,6 +69,7 @@ export default function multipleChoice(task, tasks, deleteBtn) {
             $t.classList.add("completed");
             $t.querySelector(".checker").classList.add("check");
           }
+          stats();
         }
       } else if (mode === "deleting") {
         if (!$t.classList.contains("incompleted")) {
@@ -95,6 +105,7 @@ export default function multipleChoice(task, tasks, deleteBtn) {
               el.querySelector(".checker").classList.remove("forDeleting");
             });
           }
+          stats();
         }, 250);
       });
     }

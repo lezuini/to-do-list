@@ -132,7 +132,7 @@ header {
 h1 {
   text-align: center;
   font-size: 16px;
-  color: #111;
+  color: #333;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -245,6 +245,36 @@ h1 {
   /* margin-top: 140px; */
   height: 290px;
   /* background-color: turquoise; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.spacer p {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  width: 100%;
+}
+
+#deco {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#deco svg {
+  width: 50%;
+  color: #ddd;
+  opacity: 0;
+}
+.deco svg {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1 !important;
 }
 
 .btn-container {
@@ -375,6 +405,8 @@ h1 {
   font-size: 14px;
   resize: vertical;
   line-height: 1.3;
+  transition: height 0.2s ease-in-out;
+  color: #333;
   /* user-select: none; */
 }
 

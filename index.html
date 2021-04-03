@@ -58,33 +58,28 @@
           <input type="text" placeholder="Search for a task" maxlength="20" />
         </div>
         <ul class="tasks">
-          <li class="task completed">
-            <textarea
-              maxlength="50"
-              minlength="1"
-              rows="5"
-              class="text disabled"
-              placeholder="Write something here"
-              readonly=""
-            >
-Perro</textarea
-            >
-            <span class="checker check"></span>
+          <li class="spacer">
+            <p>Tasks: <span id="nTasks">0</span></p>
+            <p>Completed: <span id="nCompletedTasks">0</span></p>
+            <p>Incomplete: <span id="nIncompleteTasks">0</span></p>
+            <div id="deco" class="deco">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Arrow Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 268l144 144 144-144M256 392V100"
+                />
+              </svg>
+            </div>
           </li>
-          <li class="task">
-            <textarea
-              maxlength="50"
-              minlength="1"
-              rows="5"
-              class="text disabled"
-              placeholder="Write something here"
-              readonly=""
-            >
-Gato</textarea
-            >
-            <span class="checker"></span>
-          </li>
-          <li class="spacer"></li>
         </ul>
       </div>
       <div class="btn-container">

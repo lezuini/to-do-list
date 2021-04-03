@@ -1,3 +1,4 @@
+import decoration from "./decoration.js";
 import handleAddingTasks from "./handle-adding-tasks.js";
 import multipleChoice from "./multiple-choice.js";
 import searchBar from "./search-bar.js";
@@ -8,4 +9,5 @@ d.addEventListener("DOMContentLoaded", () => {
   handleAddingTasks(".add-btn", ".delete-btn", ".tasks");
   searchBar(".search", ".search-box");
   multipleChoice(".task", ".task", ".trash");
+  decoration("deco");
 });

@@ -30,6 +30,16 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
     taskSet = true;
   };
 
+  const stats = () => {
+    let allTasks = d.querySelectorAll(".task");
+    let allCompTasks = d.querySelectorAll(".task.completed");
+    d.getElementById("nTasks").textContent = allTasks.length;
+    d.getElementById("nCompletedTasks").textContent = allCompTasks.length;
+    d.getElementById("nIncompleteTasks").textContent =
+      allTasks.length - allCompTasks.length;
+  };
+  stats();
+
   d.addEventListener("click", (e) => {
     const $newTask = d.createElement("li");
 
@@ -63,6 +73,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         $newTask.querySelector("textarea").focus();
         $textarea = $newTask.querySelector("textarea");
         taskNumber++;
+        stats();
       } else alert("Finish the task first");
     }
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
@@ -74,12 +85,14 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         // console.log(badChild);
         badChild.remove();
         $deleteBtn.classList.remove("show");
+        stats();
       }
     }
     d.addEventListener("keydown", (e) => {
       if (e.target === $newTask.querySelector("textarea")) {
         if (e.key === "Enter" && !e.shiftKey) {
           inAdd = false;
+
           e.preventDefault();
 
           if ($textarea.value.length > 0) {
@@ -88,6 +101,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
           } else {
             alert("Min 1 character");
           }
+          stats();
         }
       }
     });
