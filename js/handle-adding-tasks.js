@@ -41,7 +41,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         placeholder="Write something here"
         autofocus
       ></textarea>
-        <span class="checker"></span>
+        <span class="checker checking"></span>
     `;
 
     $newTask.classList.add("task");

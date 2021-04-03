@@ -81,10 +81,15 @@ header {
   position: relative;
   width: 40px;
   height: 40px;
-  /* background-color: rosybrown; */
-  border: none;
   background-color: transparent;
+  border: none;
   border-radius: 50%;
+  color: var(--btn-color);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.trash:hover {
+  transform: rotate(4deg) scale(1.2);
 }
 
 .search {
@@ -211,6 +216,12 @@ h1 {
   transform: rotate(45deg);
 }
 
+.checking {
+  border-radius: 4px;
+  background-color: var(--btn-color-red);
+  box-shadow: 0 4px 10px -2px var(--btn-color-red);
+}
+
 .spacer {
   width: 100%;
   /* margin-top: 140px; */
@@ -228,6 +239,36 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+.select-btn {
+  position: absolute;
+  bottom: 22px;
+  left: 42px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--check-color-2);
+  cursor: pointer;
+  box-shadow: 0 4px 10px -6px var(--check-color-2);
+  color: #fff;
+  transition-property: visibility, opacity, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.select-btn:hover {
+  box-shadow: 0 4px 10px -2px var(--check-color-2);
+}
+.select-btn::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 9px);
+  left: calc(50% - 9px);
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 4px;
 }
 
 .add-btn {
@@ -317,4 +358,27 @@ h1 {
   resize: none !important;
   cursor: pointer;
   user-select: none;
+}
+
+.search-box {
+  position: relative;
+  margin-top: -42px;
+  width: 100%;
+  height: 42px;
+  background-color: turquoise;
+  padding: 6px 3%;
+  box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.2);
+  transition: margin 0.2s ease-in-out;
+}
+
+.search-box input {
+  width: 100%;
+  height: 100%;
+  padding: 0 6%;
+  border: none;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 14px;
+  color: #111;
+  outline: none;
 }
