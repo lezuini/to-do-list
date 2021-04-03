@@ -23,7 +23,7 @@ export default function searchBar(btn, box) {
   d.addEventListener("keyup", (e) => {
     if (e.target === $box.querySelector("input")) {
       d.querySelectorAll("textarea").forEach((el) => {
-        el.value.toLowerCase().includes(e.target.value)
+        el.value.toLowerCase().includes(e.target.value.toLowerCase())
           ? el.parentElement.classList.remove("filtered")
           : el.parentElement.classList.add("filtered");
       });
