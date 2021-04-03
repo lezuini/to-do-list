@@ -9,12 +9,19 @@
   --body-bgcolor-2: #337beb;
   --cont-bgcolor-1: #fff;
   --cont-bgcolor-2: #eef0f3;
-  --btn-color: #5ca8e0;
-  --btn-color-red: #f52f57;
-  /* #e73c61 */
-  /* f7567c */
-  --check-color-1: #fff;
-  --check-color-2: #37d7b2;
+  --color-blue: #5ca8e0;
+  --color-red: #f52f57;
+  --color-green: #37d7b2;
+  --color-white: #fff;
+  --text-color-dark: #333;
+  --text-color-light: #999;
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-dark: rgba(0, 0, 0, 0.4);
+  --svg-color: #ddd;
+}
+
+html {
+  font-size: 1rem;
 }
 
 body {
@@ -32,28 +39,32 @@ body {
   font-family: "Assistant", sans-serif;
 }
 
+textarea::placeholder,
+input::placeholder {
+  color: var(--text-color-light);
+}
+
 .superior-cont {
-  height: 478px;
-  width: 270px;
+  height: 29.875rem;
+  width: 16.875rem;
   background: radial-gradient(
     circle at top,
     var(--cont-bgcolor-1),
     var(--cont-bgcolor-2)
   );
 
-  border-radius: 8px;
-  box-shadow: 0 4px 32px -4px rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 2rem -0.25rem var(--shadow-dark);
   overflow: hidden;
   position: relative;
 }
 .container {
-  height: calc(100% - 50px);
+  height: calc(100% - 3.125rem);
   width: 100%;
   overflow-y: scroll;
   position: absolute;
   bottom: 0;
   left: 0;
-  /* scroll-behavior: smooth; */
   scrollbar-width: none;
 }
 
@@ -64,13 +75,13 @@ body {
 
 header {
   width: 100%;
-  height: 50px;
+  height: 3.125rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: default;
   padding: 0 3%;
-  background-color: #fff;
+  background-color: var(--color-white);
   position: absolute;
   top: 0;
   left: 0;
@@ -79,12 +90,12 @@ header {
 
 .trash {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: transparent;
   border: none;
   border-radius: 50%;
-  color: var(--btn-color);
+  color: var(--color-blue);
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -94,8 +105,8 @@ header {
 
 .search {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border: none;
   background-color: transparent;
   border-radius: 50%;
@@ -104,95 +115,86 @@ header {
 
 .search:hover::before,
 .search:hover::after {
-  box-shadow: 0 0 6px -2px var(--btn-color);
+  box-shadow: 0 0 0.375rem -0.125rem var(--color-blue);
 }
 .search::before {
   content: "";
-  height: 8px;
-  width: 8px;
+  height: 0.5rem;
+  width: 0.5rem;
   position: absolute;
-  top: calc(50% - 8px);
-  left: calc(50% - 8px);
-  border: 2px solid var(--btn-color);
+  top: calc(50% - 0.5rem);
+  left: calc(50% - 0.5rem);
+  border: 0.125rem solid var(--color-blue);
   border-radius: 50%;
   transition: box-shadow 0.2s ease-in-out;
 }
 .search::after {
   content: "";
-  height: 8px;
-  width: 2px;
+  height: 0.5rem;
+  width: 0.125rem;
   position: absolute;
-  top: calc(50% + 0px);
-  left: calc(50% + 3px);
-  background-color: var(--btn-color);
+  top: calc(50%);
+  left: calc(50% + 0.1875rem);
+  background-color: var(--color-blue);
   transform: rotate(-45deg);
   transition: box-shadow 0.2s ease-in-out;
 }
 
 h1 {
   text-align: center;
-  font-size: 16px;
-  color: #333;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  color: var(--text-color-dark);
+  text-shadow: 0.125rem 0.125rem 0.25rem var(--shadow-light);
 }
 
 .tasks {
   width: 100%;
-  /* height: calc(100% - 50px); */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 0.5rem;
 }
 
 .task {
   position: relative;
   width: 94%;
-  min-height: 42px;
+  min-height: 2.625rem;
   height: min-content;
-  background-color: #fff;
-  border-radius: 21px;
+  background-color: var(--color-white);
+  border-radius: 1.3125rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   text-align: left;
-  padding: 10px 16px;
-  font-size: 13px;
-  line-height: 14px;
-  box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.2);
-  margin: 4px 0 8px;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 0.875rem;
+  box-shadow: 0 0.25rem 1.25rem -0.625rem var(--shadow-light);
+  margin: 0.25rem 0 0.5rem;
   cursor: pointer;
-  color: #111;
   transition: box-shadow 0.2s ease-in-out;
 }
 .task:hover {
-  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.25rem 0.875rem -0.25rem var(--shadow-light);
 }
-
-/* .task:first-child {
-  margin-top: 12px;
-} */
-/* .task:last-child {
-  margin-bottom: 120px;
-} */
 
 .checker {
   position: absolute;
-  right: 11px;
-  top: calc(50% - 10px);
-  width: 20px;
-  height: 20px;
+  right: 0.6875rem;
+  top: calc(50% - 0.625rem);
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
-  background-color: var(--check-color-1);
-  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  background-color: var(--color-white);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--shadow-light);
+  color: var(--color-white);
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 10px;
-  font-size: 10px;
+  line-height: 0.625rem;
+  font-size: 0.625rem;
   transition-property: background, box-shadow, border-radius;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -200,61 +202,55 @@ h1 {
 .checker::before {
   content: "";
   position: absolute;
-  left: calc(50% - 2px);
-  top: calc(50% - 6px);
-  width: 4px;
-  height: 9px;
+  left: calc(50% - 0.125rem);
+  top: calc(50% - 0.375rem);
+  width: 0.25rem;
+  height: 0.5625rem;
   transform: rotate(45deg);
 }
 
 .check {
-  background-color: var(--check-color-2);
-  box-shadow: 0 4px 10px -2px var(--check-color-2);
+  background-color: var(--color-green);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--color-green);
 }
 
 .check::before {
   border: none;
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-right: 0.0625rem solid var(--color-white);
+  border-bottom: 0.0625rem solid var(--color-white);
 }
 .checking::before {
   border: none;
 }
 
 .checking {
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: none;
-  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--shadow-light);
 }
-
-/* .deleteTask {
-  background-color: orangered;
-} */
 
 .forDeleting {
-  background-color: var(--btn-color-red);
-  box-shadow: 0 4px 10px -2px var(--btn-color-red);
+  background-color: var(--color-red);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--color-red);
 }
 .forDeleting::before {
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-right: 0.0625rem solid var(--color-white);
+  border-bottom: 0.0625rem solid var(--color-white);
 }
 
 .spacer {
   width: 100%;
-  /* margin-top: 140px; */
-  height: 290px;
-  /* background-color: turquoise; */
+  height: 18.125rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 1.875rem;
 }
 
 .spacer p {
-  font-size: 13px;
-  color: #999;
+  font-size: 0.8125rem;
+  color: var(--text-color-light);
   text-align: center;
   width: 100%;
 }
@@ -269,7 +265,7 @@ h1 {
 
 #deco svg {
   width: 50%;
-  color: #ddd;
+  color: var(--svg-color);
   opacity: 0;
 }
 .deco svg {
@@ -282,8 +278,8 @@ h1 {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 54px;
-  background: linear-gradient(to bottom, transparent, #fff);
+  height: 3.375rem;
+  background: linear-gradient(to bottom, transparent, var(--color-white));
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -291,16 +287,16 @@ h1 {
 
 .select-btn {
   position: absolute;
-  bottom: 22px;
-  left: 42px;
-  width: 46px;
-  height: 46px;
+  bottom: 1.375rem;
+  left: 2.625rem;
+  width: 2.875rem;
+  height: 2.875rem;
   border: none;
   border-radius: 50%;
-  background-color: var(--check-color-2);
+  background-color: var(--color-green);
   cursor: pointer;
-  box-shadow: 0 4px 10px -6px var(--check-color-2);
-  color: #fff;
+  box-shadow: 0 0.25rem 0.625rem -0.375rem var(--color-green);
+  color: var(--color-white);
   transition-property: visibility, opacity, box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -308,29 +304,29 @@ h1 {
   opacity: 0;
 }
 .select-btn:hover {
-  box-shadow: 0 4px 10px -2px var(--check-color-2);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--color-green);
 }
 .select-btn::before {
   content: "";
   position: absolute;
-  top: calc(50% - 9px);
-  left: calc(50% - 9px);
-  width: 14px;
-  height: 14px;
-  border: 2px solid #fff;
-  border-radius: 4px;
+  top: calc(50% - 0.5625rem);
+  left: calc(50% - 0.5625rem);
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 0.125rem solid var(--color-white);
+  border-radius: 0.25rem;
 }
 
 .add-btn {
   position: relative;
-  bottom: 18px;
-  width: 54px;
-  height: 54px;
+  bottom: 1.125rem;
+  width: 3.375rem;
+  height: 3.375rem;
   border: none;
   border-radius: 50%;
-  background-color: var(--btn-color);
+  background-color: var(--color-blue);
   cursor: pointer;
-  box-shadow: 0 4px 10px -6px var(--btn-color);
+  box-shadow: 0 0.25rem 0.625rem -0.375rem var(--color-blue);
   transition-property: visibility, opacity, box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -339,40 +335,40 @@ h1 {
 }
 
 .add-btn:hover {
-  box-shadow: 0 4px 10px -2px var(--btn-color);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--color-blue);
 }
 
 .add-btn::before {
   content: "";
   position: absolute;
-  top: calc(50% - 1px);
-  left: calc(50% - 11px);
-  width: 22px;
-  height: 2px;
-  background-color: #fff;
+  top: calc(50% - 0.0625rem);
+  left: calc(50% - 0.6875rem);
+  width: 1.375rem;
+  height: 0.125rem;
+  background-color: var(--color-white);
 }
 .add-btn::after {
   content: "";
   position: absolute;
-  top: calc(50% - 11px);
-  left: calc(50% - 1px);
-  width: 2px;
-  height: 22px;
-  background-color: #fff;
+  top: calc(50% - 0.6875rem);
+  left: calc(50% - 0.0625rem);
+  width: 0.125rem;
+  height: 1.375rem;
+  background-color: var(--color-white);
 }
 
 .delete-btn {
   position: absolute;
-  bottom: 22px;
-  right: 42px;
-  width: 46px;
-  height: 46px;
+  bottom: 1.375rem;
+  right: 2.625rem;
+  width: 2.875rem;
+  height: 2.875rem;
   border: none;
   border-radius: 50%;
-  background-color: var(--btn-color-red);
+  background-color: var(--color-red);
   cursor: pointer;
-  box-shadow: 0 4px 10px -6px var(--btn-color-red);
-  color: #fff;
+  box-shadow: 0 0.25rem 0.625rem -0.375rem var(--color-red);
+  color: var(--color-white);
   visibility: hidden;
   opacity: 0;
   transition-property: visibility, opacity, box-shadow;
@@ -380,34 +376,31 @@ h1 {
   transition-timing-function: ease-in-out;
 }
 .delete-btn:hover {
-  box-shadow: 0 4px 10px -2px var(--btn-color-red);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--color-red);
 }
 .show {
   visibility: visible;
   opacity: 1;
 }
 
-.completed * {
+.completed textarea {
   text-decoration: line-through;
-  color: #bbb;
+  color: var(--text-color-light);
   resize: none !important;
-  /* height: 22px; */
-  line-height: 22px;
 }
 
 .text {
-  width: calc(100% - 26px);
-  min-height: 22px;
-  max-height: 100px;
+  width: calc(100% - 1.625rem);
+  min-height: 1.375rem;
+  max-height: 6.25rem;
   border: none;
   outline: none;
   font-family: "Assistant", sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem;
   resize: vertical;
-  line-height: 1.3;
+  line-height: 1.125rem;
   transition: height 0.2s ease-in-out;
-  color: #333;
-  /* user-select: none; */
+  color: var(--text-color-dark);
 }
 
 .disabled {
@@ -418,12 +411,12 @@ h1 {
 
 .search-box {
   position: relative;
-  margin-top: -42px;
+  margin-top: -2.625rem;
   width: 100%;
-  height: 42px;
-  background-color: turquoise;
-  padding: 6px 3%;
-  box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.2);
+  height: 2.625rem;
+  background-color: var(--color-green);
+  padding: 0.375rem 3%;
+  box-shadow: 0 0.25rem 1.25rem -0.625rem var(--shadow-light);
   transition: margin 0.2s ease-in-out;
 }
 
@@ -432,15 +425,14 @@ h1 {
   height: 100%;
   padding: 0 6%;
   border: none;
-  border-radius: 15px;
-  font-size: 13px;
-  line-height: 14px;
-  color: #111;
+  border-radius: 0.9375rem;
+  font-size: 0.8125rem;
+  line-height: 0.875rem;
+  color: var(--text-color-dark);
   outline: none;
 }
 
 .filtered {
-  /* opacity: 0; */
   display: none;
 }
 
@@ -453,19 +445,19 @@ h1 {
 
 @keyframes shake {
   0% {
-    transform: translateX(0px);
+    transform: translateX(0rem);
   }
   25% {
-    transform: translateX(2px);
+    transform: translateX(0.125rem);
   }
   50% {
-    transform: translateX(-2px);
+    transform: translateX(-0.125rem);
   }
   75% {
-    transform: translateX(2px);
+    transform: translateX(0.125rem);
   }
   100% {
-    transform: translateX(0px);
+    transform: translateX(0rem);
   }
 }
 
@@ -475,5 +467,68 @@ h1 {
   }
   100% {
     transform: translateX(100%);
+  }
+}
+@media screen and (min-width: 240px) {
+  html {
+    font-size: 14px;
+  }
+  .superior-cont {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 410px) {
+  html {
+    font-size: 24px;
+  }
+}
+/*
+@media screen and (min-width: 600px) {
+  html {
+    font-size: 26px;
+  }
+}
+@media screen and (min-width: 700px) {
+  html {
+    font-size: 28px;
+  }
+}
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 30px;
+  }
+} */
+@media screen and (min-width: 600px) and (min-height: 600px) {
+  html {
+    font-size: 20px;
+  }
+  .superior-cont {
+    height: 29.875rem;
+    width: 16.875rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 2rem -0.25rem var(--shadow-dark);
+  }
+}
+@media screen and (min-width: 700px) and (min-height: 800px) {
+  html {
+    font-size: 28px;
+  }
+}
+@media screen and (min-width: 800px) and (min-height: 900px) {
+  html {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+  html {
+    font-size: 34px;
   }
 }

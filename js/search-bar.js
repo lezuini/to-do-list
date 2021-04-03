@@ -1,8 +1,7 @@
 const d = document;
 
 export default function searchBar(btn, box) {
-  const $btn = d.querySelector(btn),
-    $box = d.querySelector(box);
+  const $box = d.querySelector(box);
 
   let open = false;
   d.addEventListener("click", (e) => {
@@ -16,7 +15,7 @@ export default function searchBar(btn, box) {
         d.querySelectorAll("textarea").forEach((el) => {
           el.parentElement.classList.remove("filtered");
         });
-        $box.style.marginTop = "-42px";
+        $box.style.marginTop = "-2.625rem";
         open = false;
       }
     }
@@ -24,12 +23,10 @@ export default function searchBar(btn, box) {
   d.addEventListener("keyup", (e) => {
     if (e.target === $box.querySelector("input")) {
       d.querySelectorAll("textarea").forEach((el) => {
-        // console.log(el);
         el.value.toLowerCase().includes(e.target.value)
           ? el.parentElement.classList.remove("filtered")
           : el.parentElement.classList.add("filtered");
       });
     }
-    // console.log(e.target.value);
   });
 }

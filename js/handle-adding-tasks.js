@@ -16,17 +16,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
     $textarea.parentElement.classList.remove("incompleted");
     let lineas = $textarea.value.split(`\n`);
 
-    if (lineas.length === 1) {
-      $textarea.style.height = "20px";
-    } else if (lineas.length === 2) {
-      $textarea.style.height = "40px";
-    } else if (lineas.length === 3) {
-      $textarea.style.height = "60px";
-    } else if (lineas.length === 4) {
-      $textarea.style.height = "80px";
-    } else if (lineas.length === 5) {
-      $textarea.style.height = "100px";
-    }
+    $textarea.style.height = `${1.125 * lineas.length}rem`;
     taskSet = true;
   };
 
