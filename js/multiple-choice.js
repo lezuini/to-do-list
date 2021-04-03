@@ -43,7 +43,12 @@ export default function multipleChoice(task, tasks, deleteBtn) {
           });
         }
       } else {
-        alert("Termina de escribir la tarea");
+        let alert = d.querySelector(".alert");
+        alert.textContent = "Add the task with Enter first";
+        alert.classList.add("show-alert");
+        setTimeout(() => {
+          alert.classList.remove("show-alert");
+        }, 2200);
       }
 
       d.querySelector(deleteBtn).classList.add("shake");

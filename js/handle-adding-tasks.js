@@ -64,7 +64,14 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         $textarea = $newTask.querySelector("textarea");
         taskNumber++;
         stats();
-      } else alert("Finish the task first");
+      } else {
+        let alert = d.querySelector(".alert");
+        alert.textContent = "Add the task with Enter first";
+        alert.classList.add("show-alert");
+        setTimeout(() => {
+          alert.classList.remove("show-alert");
+        }, 2200);
+      }
     }
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
       if (inAdd) {
@@ -89,7 +96,12 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
             endWriteTask($textarea);
             $deleteBtn.classList.remove("show");
           } else {
-            alert("Min 1 character");
+            let alert = d.querySelector(".alert");
+            alert.textContent = "Minimum 1 character";
+            alert.classList.add("show-alert");
+            setTimeout(() => {
+              alert.classList.remove("show-alert");
+            }, 2200);
           }
           stats();
         }
