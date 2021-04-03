@@ -103,6 +103,23 @@ header {
   transform: rotate(4deg) scale(1.2);
 }
 
+.fullscreen {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  top: calc(50% - 1.25rem);
+  left: 3rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--color-blue);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.fullscreen:hover {
+  transform: scale(1.2);
+}
+
 .search {
   position: relative;
   width: 2.5rem;
