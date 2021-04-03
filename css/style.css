@@ -96,7 +96,6 @@ header {
   position: relative;
   width: 40px;
   height: 40px;
-  /* background-color: rosybrown; */
   border: none;
   background-color: transparent;
   border-radius: 50%;
@@ -144,6 +143,7 @@ h1 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding-top: 8px;
 }
 
 .task {
@@ -170,9 +170,9 @@ h1 {
   box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.2);
 }
 
-.task:first-child {
+/* .task:first-child {
   margin-top: 12px;
-}
+} */
 /* .task:last-child {
   margin-bottom: 120px;
 } */
@@ -193,9 +193,18 @@ h1 {
   align-items: center;
   line-height: 10px;
   font-size: 10px;
-  transition-property: background, box-shadow;
+  transition-property: background, box-shadow, border-radius;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
+}
+.checker::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 2px);
+  top: calc(50% - 6px);
+  width: 4px;
+  height: 9px;
+  transform: rotate(45deg);
 }
 
 .check {
@@ -204,22 +213,31 @@ h1 {
 }
 
 .check::before {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 9px;
-  left: calc(50% - 2px);
-  top: calc(50% - 6px);
   border: none;
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
-  transform: rotate(45deg);
+}
+.checking::before {
+  border: none;
 }
 
 .checking {
   border-radius: 4px;
+  background: none;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* .deleteTask {
+  background-color: orangered;
+} */
+
+.forDeleting {
   background-color: var(--btn-color-red);
   box-shadow: 0 4px 10px -2px var(--btn-color-red);
+}
+.forDeleting::before {
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 }
 
 .spacer {
@@ -256,6 +274,8 @@ h1 {
   transition-property: visibility, opacity, box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
+  visibility: hidden;
+  opacity: 0;
 }
 .select-btn:hover {
   box-shadow: 0 4px 10px -2px var(--check-color-2);
@@ -281,7 +301,11 @@ h1 {
   background-color: var(--btn-color);
   cursor: pointer;
   box-shadow: 0 4px 10px -6px var(--btn-color);
-  transition: box-shadow 0.2s ease-in-out;
+  transition-property: visibility, opacity, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .add-btn:hover {
@@ -381,4 +405,43 @@ h1 {
   line-height: 14px;
   color: #111;
   outline: none;
+}
+
+.filtered {
+  /* opacity: 0; */
+  display: none;
+}
+
+.shake {
+  animation: shake 0.2s ease-in-out;
+}
+.endAnimation {
+  animation: endAnimation 0.2s ease-in-out forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes endAnimation {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

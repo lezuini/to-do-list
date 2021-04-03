@@ -58,12 +58,38 @@
           <input type="text" placeholder="Search for a task" maxlength="20" />
         </div>
         <ul class="tasks">
+          <li class="task completed">
+            <textarea
+              maxlength="50"
+              minlength="1"
+              rows="5"
+              class="text disabled"
+              placeholder="Write something here"
+              readonly=""
+            >
+Perro</textarea
+            >
+            <span class="checker check"></span>
+          </li>
+          <li class="task">
+            <textarea
+              maxlength="50"
+              minlength="1"
+              rows="5"
+              class="text disabled"
+              placeholder="Write something here"
+              readonly=""
+            >
+Gato</textarea
+            >
+            <span class="checker"></span>
+          </li>
           <li class="spacer"></li>
         </ul>
       </div>
       <div class="btn-container">
         <button class="select-btn" value=""></button>
-        <button class="add-btn" value=""></button>
+        <button class="add-btn show" value=""></button>
         <button class="delete-btn" value="">
           <svg
             width="24px"

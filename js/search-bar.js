@@ -12,9 +12,24 @@ export default function searchBar(btn, box) {
         $box.querySelector("input").focus();
         open = true;
       } else {
+        $box.querySelector("input").value = "";
+        d.querySelectorAll("textarea").forEach((el) => {
+          el.parentElement.classList.remove("filtered");
+        });
         $box.style.marginTop = "-42px";
         open = false;
       }
     }
+  });
+  d.addEventListener("keyup", (e) => {
+    if (e.target === $box.querySelector("input")) {
+      d.querySelectorAll("textarea").forEach((el) => {
+        // console.log(el);
+        el.value.toLowerCase().includes(e.target.value)
+          ? el.parentElement.classList.remove("filtered")
+          : el.parentElement.classList.add("filtered");
+      });
+    }
+    // console.log(e.target.value);
   });
 }

@@ -7,6 +7,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
     $spacer = $taskList.querySelector(".spacer");
 
   let taskSet = true,
+    inAdd = false,
     taskNumber = 0;
 
   const endWriteTask = ($textarea) => {
@@ -41,7 +42,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         placeholder="Write something here"
         autofocus
       ></textarea>
-        <span class="checker checking"></span>
+        <span class="checker"></span>
     `;
 
     $newTask.classList.add("task");
@@ -50,6 +51,7 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
     $newTask.insertAdjacentHTML("beforeend", task);
     var $textarea;
     if (e.target.matches(addBtn)) {
+      inAdd = true;
       if (taskSet) {
         taskSet = false;
         $deleteBtn.classList.add("show");
@@ -64,16 +66,20 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
       } else alert("Finish the task first");
     }
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
-      taskSet = true;
-      console.log($taskList.lastElementChild);
-      let badChild = d.getElementById(`task${--taskNumber}`);
-      console.log(badChild);
-      badChild.remove();
-      $deleteBtn.classList.remove("show");
+      if (inAdd) {
+        inAdd = false;
+        taskSet = true;
+        // console.log($taskList.lastElementChild);
+        let badChild = d.getElementById(`task${--taskNumber}`);
+        // console.log(badChild);
+        badChild.remove();
+        $deleteBtn.classList.remove("show");
+      }
     }
     d.addEventListener("keydown", (e) => {
       if (e.target === $newTask.querySelector("textarea")) {
         if (e.key === "Enter" && !e.shiftKey) {
+          inAdd = false;
           e.preventDefault();
 
           if ($textarea.value.length > 0) {
@@ -85,30 +91,5 @@ export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
         }
       }
     });
-
-    let $t;
-
-    // console.log(e.target);
-
-    if (e.target.matches(".task") || e.target.matches(".task *")) {
-      console.log(e.target.parentElement);
-      if (e.target.matches(".task")) {
-        $t = e.target;
-        console.log($t);
-      } else {
-        $t = e.target.parentElement;
-        console.log($t);
-      }
-
-      if ($t.classList.contains("incompleted")) {
-        console.log("no esta listo");
-      } else if ($t.classList.contains("completed")) {
-        $t.classList.remove("completed");
-        $t.querySelector(".checker").classList.remove("check");
-      } else {
-        $t.classList.add("completed");
-        $t.querySelector(".checker").classList.add("check");
-      }
-    }
   });
 }
