@@ -20,7 +20,7 @@ export default function handleAddingTasks(
 
   const templateHTML = `
         <textarea
-          maxlength="50"
+          maxlength="80"
           minlength="1"
           rows="5"
           class="text"
@@ -36,7 +36,21 @@ export default function handleAddingTasks(
     $textarea.parentElement.classList.remove("incompleted");
 
     let lines = $textarea.value.split(`\n`);
-    let height = `${1.125 * lines.length}rem`;
+    console.log(lines.length);
+    let height = "";
+    if (lines.length === 1) {
+      console.log($textarea.value.length);
+      lines = 1;
+      for (let i = 1; i < 5; i++) {
+        if ($textarea.value.length >= i * 16) {
+          lines++;
+        }
+      }
+      height = `${1.125 * lines}rem`;
+    } else {
+      height = `${1.125 * lines.length}rem`;
+    }
+
     $textarea.style.height = height;
 
     let value = JSON.stringify([$textarea.value, false, height]);
@@ -44,11 +58,11 @@ export default function handleAddingTasks(
     taskNumber++;
   };
 
-  //Get data
+  //Get the data
   taskNumber = loadStorage(templateHTML, $spacer);
   updateStats();
 
-  //Hacer click
+  //Click
   d.addEventListener("click", (e) => {
     const $template = d.createElement("li");
 
@@ -58,11 +72,10 @@ export default function handleAddingTasks(
 
     const $textarea = $template.querySelector("textarea");
 
-    //Hacer click en el boton de añadir
+    //Click on the add button
     if (e.target.matches(addBtn)) {
-      //Si no hay una tarea agregandose
+      //If there is no task being added
       if (!inAddition) {
-        //a
         inAddition = true;
 
         $deleteBtn.classList.add("show");
@@ -71,20 +84,19 @@ export default function handleAddingTasks(
           behavior: "smooth",
         });
 
-        //Añadir el template a el DOM
+        //Add the template to the DOM
         $spacer.insertAdjacentElement("beforebegin", $template);
         $template.querySelector("textarea").focus();
 
-        //Actualizar estadisticas
         updateStats();
       }
-      //Si ya hay una tarea agragandose
+      //If there is already a task being added
       else {
         showAlert("Add the task with Enter first");
       }
     }
 
-    //Hacer click en el boton de eliminar
+    //Click on the delete button
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
       if (inAddition) {
         let currentTask = d.getElementById(taskNumber);
@@ -97,14 +109,14 @@ export default function handleAddingTasks(
       }
     }
 
-    //Presionar una tecla
+    //Press a key
     d.addEventListener("keydown", (e) => {
-      //Presionar una tecla dentro del textarea
+      //Press a key within the textarea
       if (e.target === $template.querySelector("textarea")) {
-        //Solo si se presiona unicamente Enter
+        //Only if Enter is pressed only
         if (e.key === "Enter" && !e.shiftKey) {
           e.preventDefault();
-          //Si el conteido del textarea es mayor que 0
+          //If the content of the textarea is greater than 0
           if ($textarea.value.length > 0) {
             finishWritingTask($textarea);
             $deleteBtn.classList.remove("show");

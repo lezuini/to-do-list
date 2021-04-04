@@ -11,8 +11,6 @@ export default function decoration(deco = "deco") {
   }, 100);
 
   d.addEventListener("click", (e) => {
-    // console.log(e.target);
-
     if (e.target === d.querySelector(".add-btn")) {
       $deco.classList.remove("deco");
     } else if (

@@ -22,14 +22,14 @@ export default function multipleChoice(
   let mode = normalMode;
 
   d.addEventListener("click", (e) => {
-    //Enlistar todas las tareas disponibles
+    //List all available tasks
     let $tasks = d.querySelectorAll(taskName);
 
-    //Si se da click en el boton de descarte
+    //If the discard button is clicked
     if (e.target.matches(discardBtn) || e.target.matches(`${discardBtn} *`)) {
-      //Si no se muestra el boton de eliminar
+      //If the delete button is not displayed
       if (!$deleteBtn.classList.contains("show") || mode === discardMode) {
-        //El modo es normal
+        //Mode is normal
         if (mode === normalMode) {
           mode = discardMode;
           $addBtn.classList.remove("show");
@@ -40,7 +40,7 @@ export default function multipleChoice(
             el.querySelector(".checker").classList.add("checking");
           });
         }
-        //El modo es descarte
+        //Mode is discard
         else {
           mode = normalMode;
           $addBtn.classList.add("show");
@@ -59,13 +59,14 @@ export default function multipleChoice(
         showAlert("Add the task with Enter first");
       }
 
+      //Cool animation
       $discardBtn.classList.add("shake");
       setTimeout(() => {
         $discardBtn.classList.remove("shake");
       }, 250);
     }
 
-    //Cambiar estado cuando se le da click a una tarea
+    //Change status when a task is clicked
     if (e.target.matches(taskName) || e.target.matches(`${taskName} *`)) {
       let $t;
       if (e.target.classList.contains("task")) {
@@ -84,7 +85,9 @@ export default function multipleChoice(
             $t.querySelector(".checker").classList.add(classDelete2);
           }
         }
-      } else {
+      }
+      //Mode is normal
+      else {
         if (!$t.classList.contains("incompleted")) {
           if ($t.classList.contains("completed")) {
             $t.classList.remove("completed");
@@ -100,7 +103,7 @@ export default function multipleChoice(
       }
     }
 
-    //Al presionar el boton de eliminar
+    //By pressing the delete button
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
       let $uselessTasks = d.querySelectorAll(`${taskName}.${classDelete1}`);
 
@@ -127,7 +130,7 @@ export default function multipleChoice(
       }, 300);
     }
 
-    //Al presionar el boton de seleccionar
+    //By pressing the select button
     if (e.target.matches(selectBtn) || e.target.matches(`${selectBtn} *`)) {
       $tasks.forEach((el) => {
         if (el.classList.contains(classDelete1)) {

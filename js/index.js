@@ -1,3 +1,9 @@
+/*
+  - TO DO List (https://github.com/leonardomeza87/to-do-list)
+  - Author: Leonardo Meza (https://github.com/leonardomeza87)
+  - Twitter: (https://twitter.com/leonardomeza87)
+*/
+
 import decoration from "./decoration.js";
 import fullscreen from "./fullscreen.js";
 import handleAddingTasks from "./handle-adding-tasks.js";

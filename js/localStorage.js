@@ -2,27 +2,23 @@ const d = document,
   storage = window.localStorage;
 
 export function loadStorage(templateHTML, $spacer) {
-  // const data = storage;
-  // console.log(data);
-
   let data = {};
 
+  //Store what was in storage
   for (let i = 0; i < storage.length; i++) {
     let key = storage.key(i);
     let value = storage.getItem(key);
 
     data[key] = value;
   }
-  console.log(data);
   storage.clear();
-  console.log(window.localStorage);
 
-  //data
+  //TaskNumber
   let i = 0;
 
+  //Update the storage
   for (let key in data) {
     let value = data[key];
-    console.log(key, value);
 
     let parsedValue = JSON.parse(value);
 
@@ -47,7 +43,6 @@ export function loadStorage(templateHTML, $spacer) {
     setInStorage(i, value);
     i++;
   }
-  console.log(window.localStorage);
   return i;
 }
 

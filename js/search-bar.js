@@ -9,9 +9,9 @@ export default function searchBar(
 
   let searchBoxOpen = false;
 
-  //Al hacer click
+  //By clicking
   d.addEventListener("click", (e) => {
-    //Hacer click en el boton de busqueda
+    //Click on the search button
     if (e.target.matches(searchBtn)) {
       const $input = $box.querySelector("input");
       if (!searchBoxOpen) {
@@ -29,9 +29,9 @@ export default function searchBar(
     }
   });
 
-  //Presionar una tecla
+  //Pressing a key
   d.addEventListener("keyup", (e) => {
-    //Presionar teclas en la caja de busqueda
+    //Press keys in the search box
     if (e.target === $box.querySelector("input")) {
       d.querySelectorAll("textarea").forEach((el) => {
         el.value.toLowerCase().includes(e.target.value.toLowerCase())
