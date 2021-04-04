@@ -1,4 +1,4 @@
-import localStorage from "./localStorage.js";
+import { modifyInStorage, deleteFromStorage } from "./localStorage.js";
 import { updateStats, showAlert } from "./utilities.js";
 
 const d = document;
@@ -89,9 +89,11 @@ export default function multipleChoice(
           if ($t.classList.contains("completed")) {
             $t.classList.remove("completed");
             $t.querySelector(".checker").classList.remove("check");
+            modifyInStorage($t.getAttribute("id"), false);
           } else {
             $t.classList.add("completed");
             $t.querySelector(".checker").classList.add("check");
+            modifyInStorage($t.getAttribute("id"), true);
           }
           updateStats();
         }
@@ -105,9 +107,7 @@ export default function multipleChoice(
       $uselessTasks.forEach((el) => {
         el.classList.add("eraseAnimation");
 
-        // let taskNumber = el.getAttribute("id");
-        // console.log(Number(taskNumber));
-        // storage.removeItem(Number(taskNumber));
+        deleteFromStorage(el.getAttribute("id"));
 
         setTimeout(() => {
           el.remove();

@@ -1,4 +1,4 @@
-import localStorage from "./localStorage.js";
+import { loadStorage, setInStorage } from "./localStorage.js";
 import { updateStats, showAlert } from "./utilities.js";
 
 const d = document;
@@ -29,20 +29,24 @@ export default function handleAddingTasks(
         ></textarea>
           <span class="checker"></span>
       `;
+
   const finishWritingTask = ($textarea) => {
     $textarea.classList.add("disabled");
     $textarea.readOnly = "true";
     $textarea.parentElement.classList.remove("incompleted");
 
     let lines = $textarea.value.split(`\n`);
+    let height = `${1.125 * lines.length}rem`;
+    $textarea.style.height = height;
 
-    $textarea.style.height = `${1.125 * lines.length}rem`;
-    // storage.setItem(taskNumber, $textarea.value);
-    // console.log(storage.getItem(taskNumber));
+    let value = JSON.stringify([$textarea.value, false, height]);
+    setInStorage(taskNumber, value);
+    taskNumber++;
   };
 
   //Get data
-  localStorage();
+  taskNumber = loadStorage(templateHTML, $spacer);
+  updateStats();
 
   //Hacer click
   d.addEventListener("click", (e) => {
@@ -83,8 +87,6 @@ export default function handleAddingTasks(
     //Hacer click en el boton de eliminar
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
       if (inAddition) {
-        // storage.removeItem(`${taskNumber}`);
-
         let currentTask = d.getElementById(taskNumber);
         currentTask.remove();
         $deleteBtn.classList.remove("show");
@@ -105,7 +107,6 @@ export default function handleAddingTasks(
           //Si el conteido del textarea es mayor que 0
           if ($textarea.value.length > 0) {
             finishWritingTask($textarea);
-            taskNumber++;
             $deleteBtn.classList.remove("show");
 
             inAddition = false;
