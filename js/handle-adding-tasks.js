@@ -46,9 +46,9 @@ export default function handleAddingTasks(
           lines++;
         }
       }
-      height = `${1.125 * lines}rem`;
+      height = `${1.1375 * lines}rem`;
     } else {
-      height = `${1.125 * lines.length}rem`;
+      height = `${1.1375 * lines.length}rem`;
     }
 
     $textarea.style.height = height;
