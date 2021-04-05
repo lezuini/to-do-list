@@ -1,63 +1,72 @@
+import localStorage from "./localStorage.js";
+import { updateStats, showAlert } from "./utilities.js";
+
 const d = document;
 
-export default function multipleChoice(task, tasks, deleteBtn) {
-  let mode = "normal";
-  let selectIsActive = false;
+export default function multipleChoice(
+  taskName = ".task",
+  addBtn = ".add-btn",
+  deleteBtn = ".delete-btn",
+  selectBtn = ".select-btn",
+  discardBtn = ".discard-btn"
+) {
+  const $addBtn = d.querySelector(addBtn),
+    $deleteBtn = d.querySelector(deleteBtn),
+    $selectBtn = d.querySelector(selectBtn),
+    $discardBtn = d.querySelector(discardBtn),
+    classDelete1 = "useless",
+    classDelete2 = "red-mark",
+    normalMode = "normal",
+    discardMode = "discard";
 
-  const stats = () => {
-    let allTasks = d.querySelectorAll(".task");
-    let allCompTasks = d.querySelectorAll(".task.completed");
-    d.getElementById("nTasks").textContent = allTasks.length;
-    d.getElementById("nCompletedTasks").textContent = allCompTasks.length;
-    d.getElementById("nIncompleteTasks").textContent =
-      allTasks.length - allCompTasks.length;
-  };
+  let mode = normalMode;
 
   d.addEventListener("click", (e) => {
-    let tasksList = d.querySelectorAll(tasks);
-    if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
-      if (
-        !d.querySelector(".delete-btn").classList.contains("show") ||
-        mode === "deleting"
-      ) {
-        if (mode === "normal") {
-          mode = "deleting";
-          d.querySelector(".add-btn").classList.remove("show");
-          d.querySelector(".select-btn").classList.add("show");
-          d.querySelector(".delete-btn").classList.add("show");
+    //Enlistar todas las tareas disponibles
+    let $tasks = d.querySelectorAll(taskName);
 
-          tasksList.forEach((el) => {
+    //Si se da click en el boton de descarte
+    if (e.target.matches(discardBtn) || e.target.matches(`${discardBtn} *`)) {
+      //Si no se muestra el boton de eliminar
+      if (!$deleteBtn.classList.contains("show") || mode === discardMode) {
+        //El modo es normal
+        if (mode === normalMode) {
+          mode = discardMode;
+          $addBtn.classList.remove("show");
+          $deleteBtn.classList.add("show");
+          $selectBtn.classList.add("show");
+
+          $tasks.forEach((el) => {
             el.querySelector(".checker").classList.add("checking");
           });
-        } else {
-          mode = "normal";
-          d.querySelector(".add-btn").classList.add("show");
-          d.querySelector(".select-btn").classList.remove("show");
-          d.querySelector(".delete-btn").classList.remove("show");
-          selectIsActive = false;
+        }
+        //El modo es descarte
+        else {
+          mode = normalMode;
+          $addBtn.classList.add("show");
+          $deleteBtn.classList.remove("show");
+          $selectBtn.classList.remove("show");
 
-          tasksList.forEach((el) => {
-            el.classList.remove("deleteTask");
-            el.querySelector(".checker").classList.remove("checking");
-            el.querySelector(".checker").classList.remove("forDeleting");
+          $tasks.forEach((el) => {
+            el.classList.remove(classDelete1);
+            el.querySelector(".checker").classList.remove(
+              "checking",
+              classDelete2
+            );
           });
         }
       } else {
-        let alert = d.querySelector(".alert");
-        alert.textContent = "Add the task with Enter first";
-        alert.classList.add("show-alert");
-        setTimeout(() => {
-          alert.classList.remove("show-alert");
-        }, 2200);
+        showAlert("Add the task with Enter first");
       }
 
-      d.querySelector(deleteBtn).classList.add("shake");
+      $discardBtn.classList.add("shake");
       setTimeout(() => {
-        d.querySelector(deleteBtn).classList.remove("shake");
+        $discardBtn.classList.remove("shake");
       }, 250);
     }
 
-    if (e.target.matches(task) || e.target.matches(`${task} *`)) {
+    //Cambiar estado cuando se le da click a una tarea
+    if (e.target.matches(taskName) || e.target.matches(`${taskName} *`)) {
       let $t;
       if (e.target.classList.contains("task")) {
         $t = e.target;
@@ -65,7 +74,17 @@ export default function multipleChoice(task, tasks, deleteBtn) {
         $t = e.target.parentElement;
       }
 
-      if (mode === "normal") {
+      if (mode === discardMode) {
+        if (!$t.classList.contains("incompleted")) {
+          if ($t.classList.contains(classDelete1)) {
+            $t.classList.remove(classDelete1);
+            $t.querySelector(".checker").classList.remove(classDelete2);
+          } else {
+            $t.classList.add(classDelete1);
+            $t.querySelector(".checker").classList.add(classDelete2);
+          }
+        }
+      } else {
         if (!$t.classList.contains("incompleted")) {
           if ($t.classList.contains("completed")) {
             $t.classList.remove("completed");
@@ -74,62 +93,51 @@ export default function multipleChoice(task, tasks, deleteBtn) {
             $t.classList.add("completed");
             $t.querySelector(".checker").classList.add("check");
           }
-          stats();
-        }
-      } else if (mode === "deleting") {
-        if (!$t.classList.contains("incompleted")) {
-          if ($t.classList.contains("deleteTask")) {
-            $t.classList.remove("deleteTask");
-            $t.querySelector(".checker").classList.remove("forDeleting");
-          } else {
-            $t.classList.add("deleteTask");
-            $t.querySelector(".checker").classList.add("forDeleting");
-          }
+          updateStats();
         }
       }
     }
-    if (e.target.matches(".delete-btn") || e.target.matches(".delete-btn *")) {
-      let actualList = d.querySelectorAll(".task.deleteTask");
-      // console.log(actualList);
-      selectIsActive = false;
-      actualList.forEach((el) => {
-        el.classList.add("endAnimation");
+
+    //Al presionar el boton de eliminar
+    if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
+      let $uselessTasks = d.querySelectorAll(`${taskName}.${classDelete1}`);
+
+      $uselessTasks.forEach((el) => {
+        el.classList.add("eraseAnimation");
+
+        // let taskNumber = el.getAttribute("id");
+        // console.log(Number(taskNumber));
+        // storage.removeItem(Number(taskNumber));
+
         setTimeout(() => {
           el.remove();
-          actualList = d.querySelectorAll(".task");
-          if (actualList.length === 0) {
-            mode = "normal";
-            d.querySelector(".add-btn").classList.add("show");
-            d.querySelector(".select-btn").classList.remove("show");
-            d.querySelector(".delete-btn").classList.remove("show");
-            selectIsActive = false;
-
-            tasksList.forEach((el) => {
-              el.classList.remove("deleteTask");
-              el.querySelector(".checker").classList.remove("checking");
-              el.querySelector(".checker").classList.remove("forDeleting");
-            });
-          }
-          stats();
+          updateStats();
         }, 250);
       });
+
+      setTimeout(() => {
+        $tasks = d.querySelectorAll(taskName);
+
+        if ($tasks.length === 0) {
+          $addBtn.classList.add("show");
+          $deleteBtn.classList.remove("show");
+          $selectBtn.classList.remove("show");
+          mode = normalMode;
+        }
+      }, 300);
     }
-    if (e.target.matches(".select-btn") || e.target.matches(".select-btn *")) {
-      let actualList = d.querySelectorAll(".task");
-      // console.log(actualList);
-      if (!selectIsActive) {
-        selectIsActive = true;
-        actualList.forEach((el) => {
-          el.classList.add("deleteTask");
-          el.querySelector(".checker").classList.add("forDeleting");
-        });
-      } else {
-        selectIsActive = false;
-        actualList.forEach((el) => {
-          el.classList.remove("deleteTask");
-          el.querySelector(".checker").classList.remove("forDeleting");
-        });
-      }
+
+    //Al presionar el boton de seleccionar
+    if (e.target.matches(selectBtn) || e.target.matches(`${selectBtn} *`)) {
+      $tasks.forEach((el) => {
+        if (el.classList.contains(classDelete1)) {
+          el.classList.remove(classDelete1);
+          el.querySelector(".checker").classList.remove(classDelete2);
+        } else {
+          el.classList.add(classDelete1);
+          el.querySelector(".checker").classList.add(classDelete2);
+        }
+      });
     }
   });
 }

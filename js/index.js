@@ -7,9 +7,21 @@ import searchBar from "./search-bar.js";
 const d = document;
 
 d.addEventListener("DOMContentLoaded", () => {
-  handleAddingTasks(".add-btn", ".delete-btn", ".tasks");
-  searchBar(".search", ".search-box");
-  multipleChoice(".task", ".task", ".trash");
+  handleAddingTasks(
+    ".add-btn",
+    ".delete-btn",
+    ".tasks",
+    ".spacer",
+    ".container"
+  );
+  multipleChoice(
+    ".task",
+    ".add-btn",
+    ".delete-btn",
+    ".select-btn",
+    ".discard-btn"
+  );
+  searchBar(".search-btn", ".search-box", "2.625rem");
   decoration("deco");
   fullscreen(".fullscreen");
 });

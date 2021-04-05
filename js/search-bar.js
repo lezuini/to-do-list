@@ -1,26 +1,37 @@
 const d = document;
 
-export default function searchBar(btn, box) {
-  const $box = d.querySelector(box);
+export default function searchBar(
+  searchBtn = ".search-btn",
+  searchBox = ".search-box",
+  searchBoxHeight = "2.625rem"
+) {
+  const $box = d.querySelector(searchBox);
 
-  let open = false;
+  let searchBoxOpen = false;
+
+  //Al hacer click
   d.addEventListener("click", (e) => {
-    if (e.target.matches(btn)) {
-      if (!open) {
+    //Hacer click en el boton de busqueda
+    if (e.target.matches(searchBtn)) {
+      const $input = $box.querySelector("input");
+      if (!searchBoxOpen) {
         $box.style.marginTop = 0;
-        $box.querySelector("input").focus();
-        open = true;
+        $input.focus();
+        searchBoxOpen = true;
       } else {
-        $box.querySelector("input").value = "";
-        d.querySelectorAll("textarea").forEach((el) => {
-          el.parentElement.classList.remove("filtered");
+        $input.value = "";
+        d.querySelectorAll(".task").forEach((el) => {
+          el.classList.remove("filtered");
         });
-        $box.style.marginTop = "-2.625rem";
-        open = false;
+        $box.style.marginTop = `-${searchBoxHeight}`;
+        searchBoxOpen = false;
       }
     }
   });
+
+  //Presionar una tecla
   d.addEventListener("keyup", (e) => {
+    //Presionar teclas en la caja de busqueda
     if (e.target === $box.querySelector("input")) {
       d.querySelectorAll("textarea").forEach((el) => {
         el.value.toLowerCase().includes(e.target.value.toLowerCase())

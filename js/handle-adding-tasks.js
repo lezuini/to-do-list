@@ -1,109 +1,119 @@
+import localStorage from "./localStorage.js";
+import { updateStats, showAlert } from "./utilities.js";
+
 const d = document;
 
-export default function handleAddingTasks(addBtn, deleteBtn, taskList) {
-  const $taskList = d.querySelector(taskList),
-    $container = d.querySelector(".container"),
+export default function handleAddingTasks(
+  addBtn = ".add-btn",
+  deleteBtn = ".delete-btn",
+  taskListName = ".tasks",
+  spacer = ".spacer",
+  container = ".container"
+) {
+  const $taskList = d.querySelector(taskListName),
+    $container = d.querySelector(container),
     $deleteBtn = d.querySelector(deleteBtn),
-    $spacer = $taskList.querySelector(".spacer");
+    $spacer = $taskList.querySelector(spacer);
 
-  let taskSet = true,
-    inAdd = false,
+  let inAddition = false,
     taskNumber = 0;
 
-  const endWriteTask = ($textarea) => {
+  const templateHTML = `
+        <textarea
+          maxlength="50"
+          minlength="1"
+          rows="5"
+          class="text"
+          placeholder="Write something here"
+          autofocus
+        ></textarea>
+          <span class="checker"></span>
+      `;
+  const finishWritingTask = ($textarea) => {
     $textarea.classList.add("disabled");
     $textarea.readOnly = "true";
     $textarea.parentElement.classList.remove("incompleted");
-    let lineas = $textarea.value.split(`\n`);
 
-    $textarea.style.height = `${1.125 * lineas.length}rem`;
-    taskSet = true;
+    let lines = $textarea.value.split(`\n`);
+
+    $textarea.style.height = `${1.125 * lines.length}rem`;
+    // storage.setItem(taskNumber, $textarea.value);
+    // console.log(storage.getItem(taskNumber));
   };
 
-  const stats = () => {
-    let allTasks = d.querySelectorAll(".task");
-    let allCompTasks = d.querySelectorAll(".task.completed");
-    d.getElementById("nTasks").textContent = allTasks.length;
-    d.getElementById("nCompletedTasks").textContent = allCompTasks.length;
-    d.getElementById("nIncompleteTasks").textContent =
-      allTasks.length - allCompTasks.length;
-  };
-  stats();
+  //Get data
+  localStorage();
 
+  //Hacer click
   d.addEventListener("click", (e) => {
-    const $newTask = d.createElement("li");
+    const $template = d.createElement("li");
 
-    let task = `
-      <textarea
-        maxlength="50"
-        minlength="1"
-        rows="5"
-        class="text"
-        placeholder="Write something here"
-        autofocus
-      ></textarea>
-        <span class="checker"></span>
-    `;
+    $template.classList.add("task", "incompleted");
+    $template.setAttribute("id", taskNumber);
+    $template.insertAdjacentHTML("beforeend", templateHTML);
 
-    $newTask.classList.add("task");
-    $newTask.classList.add("incompleted");
-    $newTask.setAttribute("id", `task${taskNumber}`);
-    $newTask.insertAdjacentHTML("beforeend", task);
-    var $textarea;
+    const $textarea = $template.querySelector("textarea");
+
+    //Hacer click en el boton de añadir
     if (e.target.matches(addBtn)) {
-      inAdd = true;
-      if (taskSet) {
-        taskSet = false;
+      //Si no hay una tarea agregandose
+      if (!inAddition) {
+        //a
+        inAddition = true;
+
         $deleteBtn.classList.add("show");
         $container.scroll({
           top: $container.scrollHeight,
           behavior: "smooth",
         });
-        $spacer.insertAdjacentElement("beforebegin", $newTask);
-        $newTask.querySelector("textarea").focus();
-        $textarea = $newTask.querySelector("textarea");
-        taskNumber++;
-        stats();
-      } else {
-        let alert = d.querySelector(".alert");
-        alert.textContent = "Add the task with Enter first";
-        alert.classList.add("show-alert");
-        setTimeout(() => {
-          alert.classList.remove("show-alert");
-        }, 2200);
+
+        //Añadir el template a el DOM
+        $spacer.insertAdjacentElement("beforebegin", $template);
+        $template.querySelector("textarea").focus();
+
+        //Actualizar estadisticas
+        updateStats();
+      }
+      //Si ya hay una tarea agragandose
+      else {
+        showAlert("Add the task with Enter first");
       }
     }
+
+    //Hacer click en el boton de eliminar
     if (e.target.matches(deleteBtn) || e.target.matches(`${deleteBtn} *`)) {
-      if (inAdd) {
-        inAdd = false;
-        taskSet = true;
-        // console.log($taskList.lastElementChild);
-        let badChild = d.getElementById(`task${--taskNumber}`);
-        // console.log(badChild);
-        badChild.remove();
+      if (inAddition) {
+        // storage.removeItem(`${taskNumber}`);
+
+        let currentTask = d.getElementById(taskNumber);
+        currentTask.remove();
         $deleteBtn.classList.remove("show");
-        stats();
+
+        inAddition = false;
+
+        updateStats();
       }
     }
+
+    //Presionar una tecla
     d.addEventListener("keydown", (e) => {
-      if (e.target === $newTask.querySelector("textarea")) {
+      //Presionar una tecla dentro del textarea
+      if (e.target === $template.querySelector("textarea")) {
+        //Solo si se presiona unicamente Enter
         if (e.key === "Enter" && !e.shiftKey) {
-          inAdd = false;
-
           e.preventDefault();
-
+          //Si el conteido del textarea es mayor que 0
           if ($textarea.value.length > 0) {
-            endWriteTask($textarea);
+            finishWritingTask($textarea);
+            taskNumber++;
             $deleteBtn.classList.remove("show");
+
+            inAddition = false;
           } else {
-            let alert = d.querySelector(".alert");
-            alert.textContent = "Minimum 1 character";
-            alert.classList.add("show-alert");
-            setTimeout(() => {
-              alert.classList.remove("show-alert");
-            }, 2200);
+            showAlert("Minimum 1 character");
           }
-          stats();
+
+          updateStats();
         }
       }
     });

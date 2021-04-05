@@ -1,9 +1,8 @@
-const d = document,
-  el = d.documentElement;
+const d = document;
 
-let inFullscreen = false;
+export default function fullscreen(btn = ".fullscreen") {
+  let inFullscreen = false;
 
-export default function fullscreen(btn) {
   d.addEventListener("click", (e) => {
     if (e.target.matches(btn) || e.target.matches(`${btn} *`)) {
       if (!inFullscreen) {
