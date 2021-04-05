@@ -26,7 +26,7 @@ git clone https://github.com/leonardomeza87/to-do-list.git
 
 If you want to support me, sponsor me through these links:
 
-- [Ko-fi](ko-fi.com/meza87) ☕
+- [Ko-fi](https://ko-fi.com/meza87) ☕
 - [PayPal](https://www.paypal.me/universedll) 🐟
 
 ---
