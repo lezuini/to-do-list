@@ -13,6 +13,7 @@ export default function handleAddingTasks(
   const $taskList = d.querySelector(taskListName),
     $container = d.querySelector(container),
     $deleteBtn = d.querySelector(deleteBtn),
+    $addBtn = d.querySelector(addBtn),
     $spacer = $taskList.querySelector(spacer);
 
   let inAddition = false,
@@ -36,10 +37,8 @@ export default function handleAddingTasks(
     $textarea.parentElement.classList.remove("incompleted");
 
     let lines = $textarea.value.split(`\n`);
-    console.log(lines.length);
     let height = "";
     if (lines.length === 1) {
-      console.log($textarea.value.length);
       lines = 1;
       for (let i = 1; i < 5; i++) {
         if ($textarea.value.length >= i * 16) {
@@ -93,6 +92,11 @@ export default function handleAddingTasks(
       //If there is already a task being added
       else {
         showAlert("Add the task with Enter first");
+
+        $addBtn.classList.add("shake");
+        setTimeout(() => {
+          $addBtn.classList.remove("shake");
+        }, 250);
       }
     }
 

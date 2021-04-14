@@ -132,15 +132,22 @@ export default function multipleChoice(
 
     //By pressing the select button
     if (e.target.matches(selectBtn) || e.target.matches(`${selectBtn} *`)) {
-      $tasks.forEach((el) => {
-        if (el.classList.contains(classDelete1)) {
-          el.classList.remove(classDelete1);
-          el.querySelector(".checker").classList.remove(classDelete2);
-        } else {
-          el.classList.add(classDelete1);
-          el.querySelector(".checker").classList.add(classDelete2);
-        }
-      });
+      if ($tasks.length > 0) {
+        $tasks.forEach((el) => {
+          if (el.classList.contains(classDelete1)) {
+            el.classList.remove(classDelete1);
+            el.querySelector(".checker").classList.remove(classDelete2);
+          } else {
+            el.classList.add(classDelete1);
+            el.querySelector(".checker").classList.add(classDelete2);
+          }
+        });
+      } else {
+        $selectBtn.classList.add("shake");
+        setTimeout(() => {
+          $selectBtn.classList.remove("shake");
+        }, 250);
+      }
     }
   });
 }

@@ -107,10 +107,6 @@ header {
 .discard-btn:hover {
   transform: rotate(4deg) scale(1.2);
 }
-.discard-btn svg {
-  width: "1.25rem" !important;
-  height: "1.25rem" !important;
-}
 
 .fullscreen {
   position: absolute;
@@ -446,7 +442,7 @@ h1 {
   background-color: var(--color-green);
   padding: 0.375rem 3%;
   box-shadow: 0 0.25rem 1.25rem -0.625rem var(--shadow-light);
-  transition: margin 0.2s ease-in-out;
+  transition: margin 0.2s cubic-bezier(0.5, -0.35, 0.5, 1.35);
 }
 
 .search-box input {
@@ -464,9 +460,9 @@ h1 {
 
 .alert {
   position: absolute;
-  margin-top: 0.5rem;
+  margin-top: -0.25rem;
   width: 100%;
-  height: 2.625rem;
+  height: 3.375rem;
   background-color: var(--color-red);
   box-shadow: 0 0.25rem 1.25rem -0.625rem var(--shadow-light);
   display: flex;
@@ -474,12 +470,12 @@ h1 {
   align-items: center;
   color: var(--text-color-dark);
   font-size: 1rem;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s cubic-bezier(0.5, -0.35, 0.5, 1.35);
   z-index: 50;
 }
 
 .show-alert {
-  transform: translateY(2.625rem);
+  transform: translateY(3.25rem);
 }
 
 .filtered {
@@ -490,7 +486,7 @@ h1 {
   animation: shake 0.2s ease-in-out;
 }
 .eraseAnimation {
-  animation: eraseAnimation 0.2s ease-in-out forwards;
+  animation: eraseAnimation 0.2s cubic-bezier(0.5, -0.35, 0.5, 1.35) forwards;
 }
 
 @keyframes shake {
@@ -540,22 +536,6 @@ h1 {
     font-size: 24px;
   }
 }
-/*
-@media screen and (min-width: 600px) {
-  html {
-    font-size: 26px;
-  }
-}
-@media screen and (min-width: 700px) {
-  html {
-    font-size: 28px;
-  }
-}
-@media screen and (min-width: 768px) {
-  html {
-    font-size: 30px;
-  }
-} */
 @media screen and (min-width: 600px) and (min-height: 600px) {
   html {
     font-size: 20px;
