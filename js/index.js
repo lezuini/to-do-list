@@ -4,6 +4,7 @@
   - Twitter: (https://twitter.com/leonardomeza87)
 */
 
+import correctSizing from "./correctSizing.js";
 import decoration from "./decoration.js";
 import fullscreen from "./fullscreen.js";
 import handleAddingTasks from "./handle-adding-tasks.js";
@@ -11,6 +12,8 @@ import multipleChoice from "./multiple-choice.js";
 import searchBar from "./search-bar.js";
 
 const d = document;
+
+correctSizing();
 
 d.addEventListener("DOMContentLoaded", () => {
   handleAddingTasks(
