@@ -14,7 +14,7 @@ export default function searchBar(
   //By clicking
   d.addEventListener("click", (e) => {
     //Click on the search button
-    if (e.target.matches(searchBtn)) {
+    if (e.target.matches(searchBtn) || e.target.matches(`${searchBtn} *`)) {
       const $input = $box.querySelector("input");
       if (!searchBoxOpen) {
         searchBoxOpen = true;

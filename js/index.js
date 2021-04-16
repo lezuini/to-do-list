@@ -5,6 +5,7 @@
 */
 
 import correctSizing from "./correctSizing.js";
+import darkTheme from "./dark-theme.js";
 import decoration from "./decoration.js";
 import fullscreen from "./fullscreen.js";
 import handleAddingTasks from "./handle-adding-tasks.js";
@@ -33,4 +34,5 @@ d.addEventListener("DOMContentLoaded", () => {
   searchBar(".search-btn", ".search-box", "2.625rem");
   decoration("deco");
   fullscreen(".fullscreen");
+  darkTheme();
 });

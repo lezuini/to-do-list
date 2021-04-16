@@ -138,6 +138,7 @@ export default function multipleChoice(
           $deleteBtn.classList.remove("show");
           $selectBtn.classList.remove("show");
           mode = normalMode;
+          $deco.classList.add("deco");
         }
       }, 300);
     }

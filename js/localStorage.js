@@ -1,6 +1,8 @@
 const d = document,
   storage = window.localStorage;
 
+let theme = "light";
+
 export function loadStorage(templateHTML, $spacer) {
   let data = {};
 
@@ -9,9 +11,15 @@ export function loadStorage(templateHTML, $spacer) {
     let key = storage.key(i);
     let value = storage.getItem(key);
 
-    data[key] = value;
+    if (key !== "theme") {
+      data[key] = value;
+    } else {
+      theme = value;
+    }
   }
   storage.clear();
+
+  setInStorage("theme", theme);
 
   //TaskNumber
   let i = 0;
@@ -58,4 +66,8 @@ export function modifyInStorage(key, value) {
 
 export function deleteFromStorage(key) {
   storage.removeItem(key);
+}
+
+export function updateTheme(mode) {
+  storage.setItem("theme", mode);
 }
