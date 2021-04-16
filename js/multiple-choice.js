@@ -14,6 +14,7 @@ export default function multipleChoice(
     $deleteBtn = d.querySelector(deleteBtn),
     $selectBtn = d.querySelector(selectBtn),
     $discardBtn = d.querySelector(discardBtn),
+    $deco = d.getElementById("deco"),
     classDelete1 = "useless",
     classDelete2 = "red-mark",
     normalMode = "normal",
@@ -39,6 +40,10 @@ export default function multipleChoice(
           $tasks.forEach((el) => {
             el.querySelector(".checker").classList.add("checking");
           });
+
+          if ($tasks.length === 0) {
+            $deco.classList.remove("deco");
+          }
         }
         //Mode is discard
         else {
@@ -54,6 +59,13 @@ export default function multipleChoice(
               classDelete2
             );
           });
+
+          if ($tasks.length === 0) {
+            $deco.classList.add("deco");
+          }
+          setTimeout(() => {
+            $discardBtn.blur();
+          }, 300);
         }
       } else {
         showAlert("Add the task with Enter first");

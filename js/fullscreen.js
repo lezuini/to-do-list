@@ -11,6 +11,9 @@ export default function fullscreen(btn = ".fullscreen") {
       } else {
         d.exitFullscreen();
         inFullscreen = false;
+        setTimeout(() => {
+          d.querySelector(btn).blur();
+        }, 300);
       }
     }
   });

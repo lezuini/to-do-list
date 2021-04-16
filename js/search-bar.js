@@ -3,9 +3,11 @@ const d = document;
 export default function searchBar(
   searchBtn = ".search-btn",
   searchBox = ".search-box",
-  searchBoxHeight = "2.625rem"
+  searchBoxHeight = "2.625rem",
+  deco = "deco"
 ) {
-  const $box = d.querySelector(searchBox);
+  const $box = d.querySelector(searchBox),
+    $deco = d.getElementById(deco);
 
   let searchBoxOpen = false;
 
@@ -15,9 +17,10 @@ export default function searchBar(
     if (e.target.matches(searchBtn)) {
       const $input = $box.querySelector("input");
       if (!searchBoxOpen) {
+        searchBoxOpen = true;
         $box.style.marginTop = 0;
         $input.focus();
-        searchBoxOpen = true;
+        $deco.classList.remove("deco");
       } else {
         $input.value = "";
         d.querySelectorAll(".task").forEach((el) => {
@@ -25,6 +28,15 @@ export default function searchBar(
         });
         $box.style.marginTop = `-${searchBoxHeight}`;
         searchBoxOpen = false;
+
+        let $tasks = d.querySelectorAll(".task");
+        if ($tasks.length === 0) {
+          setTimeout(() => {
+            if (searchBoxOpen === false) {
+              $deco.classList.add("deco");
+            }
+          }, 300);
+        }
       }
     }
   });
