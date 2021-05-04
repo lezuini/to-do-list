@@ -15,6 +15,15 @@ const CACHE_NAME = "v1_todolist",
     "./js/dark-theme.js",
     "./js/fullscreen.js",
     "./assets/favicon.png",
+    "./assets/favicon_32.png",
+    "./assets/favicon_64.png",
+    "./assets/favicon_96.png",
+    "./assets/favicon_128.png",
+    "./assets/favicon_192.png",
+    "./assets/favicon_256.png",
+    "./assets/favicon_384.png",
+    "./assets/favicon_512.png",
+    "./assets/favicon_1024.png",
   ];
 
 //During the installation phase, static assets are generally cached
