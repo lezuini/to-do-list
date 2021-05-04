@@ -1,4 +1,4 @@
-import { updateTheme } from "./localStorage.js";
+import { updateTheme } from "./local-storage.js";
 
 const d = document,
   de = d.documentElement;

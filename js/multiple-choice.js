@@ -1,4 +1,4 @@
-import { modifyInStorage, deleteFromStorage } from "./localStorage.js";
+import { modifyInStorage, deleteFromStorage } from "./local-storage.js";
 import { updateStats, showAlert } from "./utilities.js";
 
 const d = document;

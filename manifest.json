@@ -1,0 +1,19 @@
+{
+  "name": "TO-DO List",
+  "short_name": "TO-DO List",
+  "description": "Save those pending tasks and be aware of your progress is its completion",
+  "background_color": "#337beb",
+  "theme_color": "#337beb",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "./?utm_source=web_app_manifest",
+  "scope": "./",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "./assets/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}

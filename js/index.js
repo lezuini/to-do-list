@@ -4,17 +4,18 @@
   - Twitter: (https://twitter.com/leonardomeza87)
 */
 
-import correctSizing from "./correctSizing.js";
+import correctHeight from "./correct-height.js";
 import darkTheme from "./dark-theme.js";
 import decoration from "./decoration.js";
 import fullscreen from "./fullscreen.js";
 import handleAddingTasks from "./handle-adding-tasks.js";
 import multipleChoice from "./multiple-choice.js";
 import searchBar from "./search-bar.js";
+import SWinstaller from "./sw-installer.js";
 
 const d = document;
 
-correctSizing();
+correctHeight();
 
 d.addEventListener("DOMContentLoaded", () => {
   handleAddingTasks(
@@ -35,4 +36,5 @@ d.addEventListener("DOMContentLoaded", () => {
   decoration("deco");
   fullscreen(".fullscreen");
   darkTheme();
+  SWinstaller();
 });

@@ -1,4 +1,4 @@
-import { loadStorage, setInStorage } from "./localStorage.js";
+import { loadStorage, setInStorage } from "./local-storage.js";
 import { updateStats, showAlert } from "./utilities.js";
 
 const d = document;
